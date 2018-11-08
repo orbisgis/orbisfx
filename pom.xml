@@ -102,5 +102,10 @@
             <name>OrbisGIS nexus repository</name>
             <url>http://nexus.orbisgis.org/content/repositories/osgi-maven</url>
         </repository>
+        <repository>
+            <id>orbisgis-nexus-snapshot</id>
+            <name>OrbisGIS nexus snapshot repository</name>
+            <url>http://nexus.orbisgis.org/content/repositories/osgi-maven-snapshot</url>
+        </repository>
     </repositories>
 </project>
