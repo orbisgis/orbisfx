@@ -16,6 +16,7 @@
     <modules>
         <module>main-application-api</module>
         <module>main-application</module>
+        <module>osgi-dependencies</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
