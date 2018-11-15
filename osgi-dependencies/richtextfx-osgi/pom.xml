@@ -7,7 +7,7 @@
     <!-- The Basics -->
     <parent>
         <groupId>org.orbisgis</groupId>
-        <artifactId>orbisfx</artifactId>
+        <artifactId>osgi-dependencies</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>richtextfx-osgi</artifactId>
