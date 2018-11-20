@@ -18,7 +18,7 @@
         <module>main-application</module>
         <module>osgi-dependencies</module>
         <module>code-console-api</module>
-        <!--<module>code-console</module>-->
+        <module>code-console</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,7 +37,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy</artifactId>
-                <version>2.5.0</version>
+                <version>2.5.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
