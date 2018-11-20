@@ -18,7 +18,7 @@
         <module>main-application</module>
         <module>osgi-dependencies</module>
         <module>code-console-api</module>
-        <module>code-console</module>
+        <!--<module>code-console</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
