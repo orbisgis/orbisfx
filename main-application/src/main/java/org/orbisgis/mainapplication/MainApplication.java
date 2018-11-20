@@ -180,6 +180,7 @@ public class MainApplication implements IMainApplication {
      */
     private static void setScene(Scene scene){
         MainApplication.scene = scene;
+        scene.getStylesheets().add(MainApplication.class.getResource("menubar.css").toExternalForm());
     }
 
     /**
