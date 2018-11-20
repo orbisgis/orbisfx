@@ -1,0 +1,30 @@
+.menu-bar {
+    -fx-selection-bar: transparent;
+    -fx-padding: 1 1 1 1;
+}
+
+.menu {
+    -fx-padding: 1 1 1 1;
+}
+
+.menu .button, .menu .toggle-button {
+    -fx-content-display: graphic-only;
+    -fx-padding: 1 1 1 1;
+    -fx-border-radius: 2;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.menu .button:hover, .menu .toggle-button:hover {
+    -fx-content-display: graphic-only;
+    -fx-padding: 1 1 1 1;
+    -fx-border-radius: 2;
+    -fx-border-color: gray;
+}
+
+.menu .toggle-button:selected {
+    -fx-content-display: graphic-only;
+    -fx-padding: 1 1 1 1;
+    -fx-border-radius: 2;
+    -fx-border-color: cornflowerblue;
+}
