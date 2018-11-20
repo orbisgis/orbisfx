@@ -57,16 +57,38 @@ import java.util.List;
  */
 public interface ILanguageAction {
 
+    /**
+     * Enumeration of basic action that can be implemented by the language pack.
+     */
     enum Action{
         EXECUTE, EXECUTE_SELECTION, STOP, CLEAR, OPEN, SAVE, SAVE_AS, FIND, UN_COMMENT;
+
+        /**
+         * Return the ImageView with the icon of the Action.
+         *
+         * @return The ImageView with the icon of the Action.
+         */
         public ImageView getImageView(){
             return new ImageView(new Image(this.getClass().getResourceAsStream(this.name().toLowerCase()+".png")));
         }
+
+        /**
+         * Return the action name.
+         *
+         * @return The action name.
+         */
         public String getActionName(){
             return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
         }
     }
 
+    /**
+     * Create the Menu corresponding to the given Action
+     *
+     * @param action Action used to create the Menu.
+     *
+     * @return The Menu created from the given Action.
+     */
     default Menu createMenu(Action action){
         Menu menu = new Menu();
         ImageView image = action.getImageView();
