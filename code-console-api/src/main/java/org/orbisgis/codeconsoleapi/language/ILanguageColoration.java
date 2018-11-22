@@ -34,51 +34,28 @@
  * or contact directly:
  * info_at_ orbisgis.org
  */
-package org.orbisgis.codeconsole.language;
+package org.orbisgis.codeconsoleapi.language;
 
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Menu;
-import javafx.scene.input.MouseEvent;
+import org.fxmisc.richtext.CodeArea;
 
-import java.util.List;
+import java.net.URI;
+import java.util.concurrent.ExecutorService;
 
 /**
- * Add basic action linked to the language. Those action are mainly used to be displayed as buttons in the menu bar
- * of the code console thanks to the method {@link #getMenuActions()}.
- * The other methods returning a EventHandler can just return null and should not necessarily be used.
- * Those methods are defined just to give a list of action which can be included in the menu bar.
+ * Add the code coloration to a language.
  *
  * @author Sylvain PALOMINOS (UBS 2018)
  * @author Erwan Bocher (CNRS)
  */
-public interface ILanguageAction {
+public interface ILanguageColoration {
 
     /**
-     * Return the EventHandler to use on the execute action.
+     * Generate the code coloration, apply it to the CodeArea using the ExecutorService and return the URI of the CSS
+     * generated file in order to register it in the FX Application
      *
-     * @return The EventHandler to use on the execute action.
+     * @param codeArea CodeArea where the code is written.
+     * @param executorService ExecutorService use to run the coloration in a separated Thread.
+     * @return The URI of the CSS generated file which should be registered in the FX Application.
      */
-    EventHandler<MouseEvent> getExecuteEventHandler();
-
-    /**
-     * Return the EventHandler to use on the open action.
-     *
-     * @return The EventHandler to use on the open action.
-     */
-    EventHandler<MouseEvent> getOpenEventHandler();
-
-    /**
-     * Return the EventHandler to use on the save action.
-     *
-     * @return The EventHandler to use on the save action.
-     */
-    EventHandler<MouseEvent> getSaveEventHandler();
-
-    /**
-     * Return a list of Menu object which will be displayed in the menu bar of the code console.
-     *
-     * @return The list of the actions associated to the language.
-     */
-    List<Menu> getMenuActions();
+    URI generateColoration(CodeArea codeArea, ExecutorService executorService);
 }

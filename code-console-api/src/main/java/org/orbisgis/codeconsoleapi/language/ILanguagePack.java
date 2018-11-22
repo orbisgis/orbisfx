@@ -34,28 +34,22 @@
  * or contact directly:
  * info_at_ orbisgis.org
  */
-package org.orbisgis.codeconsole.language;
-
-import org.fxmisc.richtext.CodeArea;
-
-import java.net.URI;
-import java.util.concurrent.ExecutorService;
+package org.orbisgis.codeconsoleapi.language;
 
 /**
- * Add the code coloration to a language.
+ * Definition of a supported language.
+ * To add to the support additional functionality, other ILanguage interface should be implemented
+ * (like ILanguageAction or ILanguagePack)
  *
  * @author Sylvain PALOMINOS (UBS 2018)
  * @author Erwan Bocher (CNRS)
  */
-public interface ILanguageColoration {
+public interface ILanguagePack {
 
     /**
-     * Generate the code coloration, apply it to the CodeArea using the ExecutorService and return the URI of the CSS
-     * generated file in order to register it in the FX Application
+     * Return the String human readable representation of the language name.
      *
-     * @param codeArea CodeArea where the code is written.
-     * @param executorService ExecutorService use to run the coloration in a separated Thread.
-     * @return The URI of the CSS generated file which should be registered in the FX Application.
+     * @return Human readable language name.
      */
-    URI generateColoration(CodeArea codeArea, ExecutorService executorService);
+    String getLanguageName();
 }

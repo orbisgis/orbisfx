@@ -34,30 +34,69 @@
  * or contact directly:
  * info_at_ orbisgis.org
  */
-package org.orbisgis.codeconsole;
-
-import org.orbisgis.codeconsole.language.ILanguagePack;
-import org.orbisgis.mainapplicationapi.IDock;
+package org.orbisgis.codeconsoleapi;
 
 /**
- * Definition of a code console able to interpret a language registered through a ILanguagePack implementation.
+ * Definition of a css style element with its id and its properties which can be converted into a String representation :
+ *
+ * .id {
+ *     styleType : value;
+ *     styleType : value;
+ *     styleType : value;
+ * }
  *
  * @author Sylvain PALOMINOS (UBS 2018)
  * @author Erwan Bocher (CNRS)
  */
-public interface ICodeConsole extends IDock {
+public interface IColorationStyleWrapper {
 
     /**
-     * Add a language support as defined in the language pack.
-     *
-     * @param languagePack Language support definition.
+     * Enumeration of all the css properties applicable for the code coloration.
      */
-    void addLanguagePack(ILanguagePack languagePack);
+    enum StyleType{
+        /** Text color */
+        FILL("-fx-fill"),
+        /** font weight of the text (bold, bolder, lighter) */
+        FONT_WEIGHT("-fx-font-weight");
+
+        /** String representation of the style type (used in the asString() method) */
+        String value;
+
+        /** Enumeration constructor */
+        StyleType(String value){
+            this.value = value;
+        }
+
+        @Override
+        public String toString(){
+            return value;
+        }
+    }
 
     /**
-     * removes a language support as defined in the language pack.
+     * Sets the id of the css property.
      *
-     * @param languagePack Language support definition.
+     * @param id Id of the property.
      */
-    void removeLanguagePack(ILanguagePack languagePack);
+    void setId(String id);
+
+    /** Add to the css property a StyleType and its value.
+     *
+     * @param styleType Style type object.
+     * @param value Value of the
+     */
+    void addStyle(StyleType styleType, String value);
+
+    /**
+     * Convert the IColorationStyleWrapper into its String representation :
+     *
+     * .id {
+     *     styleType : value;
+     *     styleType : value;
+     *     styleType : value;
+     * }
+     *
+     * @return The String representation
+     */
+    String asString();
 }
