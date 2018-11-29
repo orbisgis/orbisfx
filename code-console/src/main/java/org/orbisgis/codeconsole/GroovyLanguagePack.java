@@ -15,8 +15,10 @@ import org.fxmisc.richtext.CodeArea;
 import org.orbisgis.codeconsoleapi.language.ILanguageAction;
 import org.orbisgis.codeconsoleapi.language.ILanguageColoration;
 import org.orbisgis.codeconsoleapi.language.ILanguagePack;
+import org.orbisgis.syntaxmanagerapi.ISyntaxProviderManager;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -66,6 +68,8 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
     /** Map of the variable (name, property itself) to give to the GroovyShell for the script execution. */
     private Map<String, Object> variableMap = new HashMap<>();
 
+    private ISyntaxProviderManager syntaxProviderManager;
+
     @Activate
     public void activate(){
         propertyMap.put("out", infoLogger);
@@ -77,7 +81,9 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
         return event -> {
             if(groovyTask == null || groovyTask.isDone()) {
                 groovyTask = new GroovyTask(codeArea.getText(), propertyMap, variableMap,
-                        new SLF4JOutputStream[]{infoLogger, errorLogger}, new Button[]{buttonExecute, buttonExecuteSelect});
+                        new SLF4JOutputStream[]{infoLogger, errorLogger},
+                        new Button[]{buttonExecute, buttonExecuteSelect},
+                        syntaxProviderManager);
                 Platform.runLater(groovyTask);
             }
         };
@@ -88,7 +94,9 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
         return event -> {
             if(groovyTask == null || groovyTask.isDone()) {
                 groovyTask = new GroovyTask(codeArea.getSelectedText(), propertyMap, variableMap,
-                        new SLF4JOutputStream[]{infoLogger, errorLogger}, new Button[]{buttonExecute, buttonExecuteSelect});
+                        new SLF4JOutputStream[]{infoLogger, errorLogger},
+                        new Button[]{buttonExecute, buttonExecuteSelect},
+                        syntaxProviderManager);
                 Platform.runLater(groovyTask);
             }
         };
@@ -266,6 +274,25 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
     }
 
     /**
+     * Set the ISyntaxProviderManager in order to add as variable the SyntaxObject to the groovy console.
+     *
+     * @param syntaxProviderManager ISyntaxProviderManager to add as variable the SyntaxObject to the groovy console.
+     */
+    @Reference
+    public void setISyntaxProviderManager(ISyntaxProviderManager syntaxProviderManager) {
+        this.syntaxProviderManager = syntaxProviderManager;
+    }
+
+    /**
+     * Unset the ISyntaxProviderManager.
+     *
+     * @param syntaxProviderManager ISyntaxProviderManager unset.
+     */
+    public void unsetISyntaxProviderManager(ISyntaxProviderManager syntaxProviderManager) {
+        this.syntaxProviderManager = null;
+    }
+
+    /**
      * Task executing a groovy script in a separated thread.
      */
     public static class GroovyTask extends Task {
@@ -276,14 +303,16 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
         private Map<String, Object> properties;
         private Button[] executeAction;
         private Thread thread;
+        private ISyntaxProviderManager syntaxProviderManager;
 
         GroovyTask(String script, Map<String, Object> properties, Map<String, Object> variables,
-                   SLF4JOutputStream[] loggers, Button[] executeAction) {
+                   SLF4JOutputStream[] loggers, Button[] executeAction, ISyntaxProviderManager syntaxProviderManager) {
             this.script = script;
             this.loggers = loggers;
             this.variables = variables;
             this.properties = properties;
             this.executeAction = executeAction;
+            this.syntaxProviderManager = syntaxProviderManager;
         }
 
         @Override
@@ -292,13 +321,18 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
             try {
                 final GroovyShell groovyShell = new GroovyShell();
                 variables.forEach(groovyShell::setVariable);
+                syntaxProviderManager.getSyntaxProviderList()
+                        .forEach(syntaxProvider -> syntaxProvider.getISyntaxObjectCollection()
+                                .forEach(syntaxObject -> groovyShell.setVariable(syntaxObject.getName(), syntaxObject.getObject())));
                 properties.forEach(groovyShell::setProperty);
                 Runnable scriptRun = () -> {
                     try {
                         Object o = groovyShell.evaluate(script);
-                        LOGGER.info("Script has returned : "+o.toString());
+                        if(o != null) {
+                            LOGGER.info("Script has returned : " + o.toString());
+                        }
                     } catch (Exception e) {
-                        LOGGER.error("Cannot execute this R script.\nCause : " + e.getMessage());
+                        LOGGER.error("Cannot execute this Groovy script.\nCause : " + e.getMessage());
                     } finally {
                         Arrays.stream(executeAction).forEach(button -> button.setDisable(false));
                     }

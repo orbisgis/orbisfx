@@ -39,6 +39,11 @@
                 <artifactId>groovy</artifactId>
                 <version>2.5.4</version>
             </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-sql</artifactId>
+                <version>2.5.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -58,7 +63,7 @@
     </build>
 
     <!-- More Project Information -->
-    <name>OrbisUI</name>
+    <name>OrbisFX</name>
     <description>User Interface for OrbisGIS application</description>
     <url>https://github.com/orbisgis/orbisui</url>
     <licenses>
