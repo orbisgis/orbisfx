@@ -36,8 +36,6 @@
  */
 package org.orbisgis.mainapplicationapi;
 
-import javafx.stage.Stage;
-
 import java.net.URL;
 
 /**
@@ -77,6 +75,4 @@ public interface IMainApplication {
      * @param cssUrl Url of the CSS style file to register.
      */
     void registerStyle(URL cssUrl);
-
-    Stage getStage();
 }

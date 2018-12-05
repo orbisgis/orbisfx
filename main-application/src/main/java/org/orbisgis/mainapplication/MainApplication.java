@@ -78,7 +78,6 @@ public class MainApplication implements IMainApplication {
     public void activate(){
         LOGGER.debug("Starting component");
         GisApplicationLauncher.launchApp();
-        LOGGER.debug("Component started");
     }
 
     @Override
@@ -190,11 +189,6 @@ public class MainApplication implements IMainApplication {
      */
     private static void setStage(Stage stage){
         MainApplication.stage = stage;
-    }
-
-    @Override
-    public Stage getStage(){
-        return stage;
     }
 
     @Override

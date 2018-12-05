@@ -19,6 +19,7 @@ import org.orbisgis.syntaxmanagerapi.ISyntaxProviderManager;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -278,7 +279,7 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
      *
      * @param syntaxProviderManager ISyntaxProviderManager to add as variable the SyntaxObject to the groovy console.
      */
-    @Reference
+    @Reference(cardinality = ReferenceCardinality.OPTIONAL)
     public void setISyntaxProviderManager(ISyntaxProviderManager syntaxProviderManager) {
         this.syntaxProviderManager = syntaxProviderManager;
     }
@@ -323,7 +324,7 @@ public class GroovyLanguagePack implements ILanguagePack, ILanguageAction, ILang
                 variables.forEach(groovyShell::setVariable);
                 syntaxProviderManager.getSyntaxProviderList()
                         .forEach(syntaxProvider -> syntaxProvider.getISyntaxObjectCollection()
-                                .forEach(syntaxObject -> groovyShell.setVariable(syntaxObject.getName(), syntaxObject.getObject())));
+                                .forEach(syntaxObject -> groovyShell.setVariable(syntaxObject.getName(), syntaxObject)));
                 properties.forEach(groovyShell::setProperty);
                 Runnable scriptRun = () -> {
                     try {

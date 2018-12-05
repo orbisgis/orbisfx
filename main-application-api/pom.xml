@@ -36,8 +36,16 @@
             <artifactId>org.osgi.enterprise</artifactId>
         </dependency>
         <dependency>
-            <groupId></groupId>
-            <artifactId></artifactId>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
         </dependency>
     </dependencies>
 
@@ -48,6 +56,18 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Embed-Dependency>javafx-graphics;scope=compile;inline=true,
+                            javafx-controls;scope=compile;inline=true,
+                            javafx-base;scope=compile;inline=true
+                        </Embed-Dependency>
+                        <Export-Package>
+                            javafx.*, com.sun.*, org.orbisgis.mainapplicationapi.*
+                        </Export-Package>
+                    </instructions>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
