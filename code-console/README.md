@@ -18,7 +18,7 @@ Several languages are already implemented into language pack.
  the application, the dependency management can be tricky. There is
  two cases :
    - Dependency used only within the script : if the dependency is only
-   used inside the script and doesn't need acces to the system
+   used inside the script and doesn't need to access the system
    ClassLoader, the `@Grab`, `@Grapes`, `GrabResolver` ... annotations
     can be used.
    - Dependency using the system CLassLoader : if the dependency need
