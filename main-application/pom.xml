@@ -41,6 +41,10 @@
             <version>${parent.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- Build Settings -->

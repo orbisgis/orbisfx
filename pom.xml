@@ -18,7 +18,7 @@
         <module>main-application</module>
         <module>osgi-dependencies</module>
         <module>code-console-api</module>
-        <!--<module>code-console</module>-->
+        <module>code-console</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,6 +39,26 @@
                 <artifactId>groovy</artifactId>
                 <version>2.5.4</version>
             </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-sql</artifactId>
+                <version>2.5.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-graphics</artifactId>
+                <version>11.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>11.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-base</artifactId>
+                <version>11.0.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -58,9 +78,9 @@
     </build>
 
     <!-- More Project Information -->
-    <name>OrbisUI</name>
+    <name>OrbisFX</name>
     <description>User Interface for OrbisGIS application</description>
-    <url>https://github.com/orbisgis/orbisui</url>
+    <url>https://github.com/orbisgis/orbisfx</url>
     <licenses>
         <license>
             <name>The GNU General Public License, Version 3.0</name>
@@ -92,14 +112,14 @@
     <!-- Environment Settings -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/orbisgis/orbisui/issues</url>
+        <url>https://github.com/orbisgis/orbisfx/issues</url>
     </issueManagement>
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.com/orbisgis/orbisui</url>
+        <url>https://travis-ci.com/orbisgis/orbisfx</url>
     </ciManagement>
     <scm>
-        <connection>scm:git:git://github.com/orbisgis/orbisui</connection>
+        <connection>scm:git:git://github.com/orbisgis/orbisfx</connection>
     </scm>
     <repositories>
         <repository>

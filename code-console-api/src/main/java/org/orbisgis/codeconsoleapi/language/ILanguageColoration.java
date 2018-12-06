@@ -28,7 +28,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Main Application. If not, see <http://www.gnu.org/licenses/>.
+ * Code Console API. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more information, please consult: <http://www.orbisgis.org/>
  * or contact directly:
@@ -38,7 +38,6 @@ package org.orbisgis.codeconsoleapi.language;
 
 import org.fxmisc.richtext.CodeArea;
 
-import java.net.URI;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -50,12 +49,10 @@ import java.util.concurrent.ExecutorService;
 public interface ILanguageColoration {
 
     /**
-     * Generate the code coloration, apply it to the CodeArea using the ExecutorService and return the URI of the CSS
-     * generated file in order to register it in the FX Application
+     * Generate the code coloration, apply it to the CodeArea using the ExecutorService.
      *
      * @param codeArea CodeArea where the code is written.
      * @param executorService ExecutorService use to run the coloration in a separated Thread.
-     * @return The URI of the CSS generated file which should be registered in the FX Application.
      */
-    URI generateColoration(CodeArea codeArea, ExecutorService executorService);
+    void generateColoration(CodeArea codeArea, ExecutorService executorService);
 }

@@ -1,0 +1,24 @@
+.console {
+    -fx-font-family: monospace;
+    -fx-cursor: text;
+}
+
+.console .paragraph-box .paragraph-text {
+    -fx-padding: 0 2px;
+}
+
+.console .caret {
+    -rtfx-blink-rate: 500ms;
+    -fx-stroke-width: 1.0;
+}
+
+.console .selection {
+    -fx-fill: lightskyblue;
+    -fx-stroke-width: 0;
+}
+
+.console .find {
+    -rtfx-border-stroke-color: orangered;
+    -rtfx-border-stroke-width: 1.0;
+    -rtfx-background-color: burlywood;
+}

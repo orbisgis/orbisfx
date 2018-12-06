@@ -9,6 +9,6 @@ public class WorkAround {
 
     @Activate
     public void activate(){
-        com.sun.javafx.css.converters.SizeConverter.SequenceConverter.getBooleanConverter();
+        javafx.css.converter.SizeConverter.SequenceConverter.getBooleanConverter();
     }
 }

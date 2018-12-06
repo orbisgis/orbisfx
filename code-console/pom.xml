@@ -10,7 +10,7 @@
         <artifactId>orbisfx</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>main-application-api</artifactId>
+    <artifactId>code-console</artifactId>
     <packaging>bundle</packaging>
 
     <!-- Dependencies -->
@@ -36,16 +36,39 @@
             <artifactId>org.osgi.enterprise</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.orbisgis</groupId>
+            <artifactId>main-application</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.orbisgis</groupId>
+            <artifactId>code-console-api</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fxmisc.richtext</groupId>
+            <artifactId>richtextfx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-sql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.orbisgis</groupId>
+            <artifactId>syntax-manager-api</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
         </dependency>
     </dependencies>
 
@@ -56,18 +79,6 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Embed-Dependency>javafx-graphics;scope=compile;inline=true,
-                            javafx-controls;scope=compile;inline=true,
-                            javafx-base;scope=compile;inline=true
-                        </Embed-Dependency>
-                        <Export-Package>
-                            javafx.*, com.sun.*, org.orbisgis.mainapplicationapi.*
-                        </Export-Package>
-                    </instructions>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
